@@ -4,10 +4,8 @@ def add(a,b):
 def subtract(a,b):
     return a-b
 
-plus = add
-print(plus(2,3))
-print(plus)
-print(add)
+def calculator(operation, a, b):
+    return operation(a,b)
 
-operations = [add, subtract]
-print(operations[1](2,3))
+print(calculator(add, 2, 3))
+print(calculator(subtract, 2, 3))
