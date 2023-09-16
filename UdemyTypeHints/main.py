@@ -61,4 +61,22 @@ class Fruit:
 orange:Fruit = Fruit(name="Orange", weight=300)
 orange.describe()
     
-    
+# Return types
+
+def get_user(user_id:int) -> str | None:
+    users = {1:"Shri",2:"Shail"}
+    return users.get(user_id)
+
+print(get_user(1))
+print(get_user(88))
+
+# External types
+
+import requests
+from requests import Response
+
+def get_response_code(url:str) -> int:
+    return requests.get(url=url).status_code
+
+def analyze_code(response: Response):
+    print(response.content)
