@@ -40,3 +40,59 @@ def get_first_element(sequence: Sequence[int]) -> int:
 
 print(get_first_element(sample_list))
 # get_first_element(sample_set)
+
+from typing import Callable
+from datetime import datetime
+
+def get_time() -> str:
+    return f"{datetime.now():%H:%M:%S}"
+
+def repeat(func:Callable, amount:int):
+    for i in range(amount):
+        print(f"{i+1}: {func()}")
+
+repeat(get_time, 3)
+
+def print_it(text:str, print_func:Callable[[str], None])->None:
+    print_func(text)
+
+def print_loud(text:str)->None:
+    print(f"{text.upper()}!")
+
+print_it('hello', print_func=print_loud)
+
+# Protocols
+from typing import Protocol
+class Printer(Protocol):
+    def print(self, magazine:str)->None:
+        ...
+    def copy(self, magazine:str, copies:int)->None:
+        ...
+
+class LazerPrinter:
+    def __init__(self, name:str, version:int) -> None:
+        self.name = name
+        self.version = version
+    
+    def print(self, magazine:str) -> None:
+        print(f"The printer {self.name} with version {self.version} is printing magazine {magazine}")
+    def copy(self, magazine:str, copies:int)->None:
+        print(f"The printer {self.name} with version {self.version} is printing {copies} copies of the magazine {magazine}")
+
+lp:Printer = LazerPrinter("LazerPrinter",10)
+lp.print("Python Grail")
+lp.copy("Python Grail", 5)
+
+class InkJetPrinter:
+    def __init__(self, name:str, version:int) -> None:
+        self.name = name
+        self.version = version
+    
+    def print(self, magazine:str) -> None:
+        print(f"The printer {self.name} with version {self.version} is printing magazine {magazine}")
+    def copy(self, magazine:str, copies:int)->None:
+        print(f"The printer {self.name} with version {self.version} is printing {copies} copies of the magazine {magazine}")
+
+ijp:Printer = InkJetPrinter("InkJetPrintet", 11)
+ijp.print("Python Adventures")
+ijp.copy("Python Adventures", 11)
